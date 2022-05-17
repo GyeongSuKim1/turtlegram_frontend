@@ -11,12 +11,16 @@ async function handlesignin() {
         method: 'POST',
         body: JSON.stringify(signupData)
     })
+    console.log(response)
 
-    if (response.status == 200) {
+    response_json = await response.json() 
+    console.log(response_json)
+
+    if (response.status == 201) {
         alert('환영합니다~')
         window.location.replace('http://127.0.0.1:5500/turtlegram_frontend/login.html')
-    } else {
-        alert('로그인 해라')
+    } else if (response.status == 200) {
+        alert('제대로 입력해주세요')
         window.location.reload()
     }
 }
