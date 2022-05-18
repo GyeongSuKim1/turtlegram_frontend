@@ -46,18 +46,19 @@ async function handlelogin() {
 
     response_json = await response.json()
     console.log(response_json)
+    // 로컬스토리지에 토큰 값 저장
     localStorage.setItem("token", response_json.token)
 }
 
-// async function getName() {
-//     const response = await fetch(`${backend_base_url}/get_user_info`, {
-//         headers: {
-//             'Authorization':localStorage.getItem("token")
-//         }
-//     })
-//     response_json = await response.json()
-//     console.log(response_json)
+async function getName() {
+    const response = await fetch(`${backend_base_url}/getuserinfo`, {
+        headers: {
+            'Authorization':localStorage.getItem("token")
+        }
+    })
+    response_json = await response.json()
+    console.log(response_json)
 
-//     const username = document.getElementById("username")
-//     username.innerText
-// }
+    const username = document.getElementById("user_name")
+    username.innerText = response_json.email
+}
